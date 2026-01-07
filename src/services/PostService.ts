@@ -29,16 +29,22 @@ export class PostService {
         return postRepository.create(data)
      }
 
-     async updatePost(id: string, data: { title: string; content: string }) {
+     async updatePost(id: string, userRole: string, data: { title: string; content: string, published: boolean; }) {
         if (!id) {
             throw new Error("Post não encontrado")
+        }
+        if (userRole !== "TEACHER") {
+            throw new Error("Atualização de posts permitida apenas para professores")
         }
         return postRepository.update(id, data)
      }
 
-     async deletePost(id: string) {
+     async deletePost(id: string, userRole: string) {
         if (!id) {
             throw new Error("Post não encontrado")
+        }
+        if (userRole !== "TEACHER") {
+            throw new Error("Exclusão de posts permitida apenas para professores")
         }
         return postRepository.delete(id)
      }

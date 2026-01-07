@@ -19,7 +19,7 @@ model Post {
   content   String
   authorId  String  @db.ObjectId
   author    User    @relation(fields: [authorId], references: [id])
-  published Boolean @default(true)
+  published Boolean
 }
 
 model User {

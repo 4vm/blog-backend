@@ -15,13 +15,22 @@ export class PostRepository {
         return prisma.post.create({ data });
     }
 
-    async update(id: string, data: { title: string; content: string }) {
+    async update(id: string, data: { title: string; content: string, published: boolean }) {
         return prisma.post.update({ where: { id }, data });
     }
 
-    async delete(id: string) {
-        return prisma.post.delete({ where: { id } });
-    }
+async delete(id: string) {
+  const result = await prisma.post.deleteMany({
+    where: { id }
+  });
+
+  if (result.count === 0) {
+    throw new Error("Post não encontrado");
+  }
+
+  return result;
+}
+
 
     async searchByKeyword(keyword: string) {
         return prisma.post.findMany({

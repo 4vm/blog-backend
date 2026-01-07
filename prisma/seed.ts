@@ -1,6 +1,7 @@
 import { prisma } from "./client"
 
 async function main() {
+  await prisma.post.deleteMany();
   await prisma.user.deleteMany({})
 
   //usuário TEACHER
@@ -21,7 +22,7 @@ async function main() {
     }
   })
 
-  console.log("✅ Usuários criados:")
+  console.log("Usuários criados:")
   console.log("Teacher:", teacher)
   console.log("Student:", student)
 }

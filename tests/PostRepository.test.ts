@@ -4,7 +4,7 @@ const mockCreate = jest.fn();
 const mockUpdate = jest.fn();
 const mockDeleteMany = jest.fn();
 
-jest.mock("../prisma/client", () => ({
+jest.mock("../src/client", () => ({
   prisma: {
     post: {
       findMany: mockFindMany,

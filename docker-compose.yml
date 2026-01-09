@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: amadeu123/blog-backend
     ports:
      - "${PORT:-3000}:3000"
     environment:

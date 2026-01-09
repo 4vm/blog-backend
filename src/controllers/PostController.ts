@@ -8,7 +8,7 @@ export class PostController {
     const userRole = req.headers["x-role"] as string
         try {
             const posts = await postService.getAllPosts(userRole);
-            res.json(posts);
+            res.status(200).json(posts);
         } catch (error) {
             res.status(400).json({ error: "Role inválido ou não informado" });
         }

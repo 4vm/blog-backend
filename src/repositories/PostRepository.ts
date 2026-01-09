@@ -1,6 +1,9 @@
-import { prisma } from "../../prisma/client"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient();
 
 export class PostRepository {
+
     async findAll() { return prisma.post.findMany(); }
 
     async findPublished() {

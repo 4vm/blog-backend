@@ -2,7 +2,7 @@
 
 Este projeto é um backend CRUD.
 
-## 🚀 Como rodar localmente
+## 🚀 Como rodar localmente 🚀
 
 1. Instale dependências:
    ```bash

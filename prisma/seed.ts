@@ -1,4 +1,4 @@
-import { prisma } from "./client"
+import { prisma } from "../src/client"
 
 async function main() {
   await prisma.post.deleteMany();

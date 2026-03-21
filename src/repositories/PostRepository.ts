@@ -33,9 +33,15 @@ export class PostRepository {
     });
   }
 
-  async create(data: { title: string; content: string; authorId: string; published: boolean }) {
+  async create(data: { 
+    title: string; 
+    content: string; 
+    authorId: string; 
+    authorName?: string;
+    published: boolean 
+    }) {
     return prisma.post.create({ data });
-  }
+   }
 
   async update(id: string, data: { title: string; content: string, published: boolean }) {
     return prisma.post.update({ where: { id }, data });

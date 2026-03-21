@@ -19,6 +19,7 @@ model Post {
   content   String
   authorId  String  @db.ObjectId
   author    User    @relation(fields: [authorId], references: [id])
+  authorName  String?
   published Boolean
 }
 

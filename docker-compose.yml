@@ -5,6 +5,8 @@ services:
      - "${PORT:-3000}:3000"
     environment:
      - PORT=${PORT:-3000}
+     - JWT_SECRET=${JWT_SECRET:-my_super_secret_key}
+
     env_file:
       - .env
     restart: always

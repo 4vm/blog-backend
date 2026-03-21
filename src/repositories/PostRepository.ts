@@ -43,9 +43,20 @@ export class PostRepository {
     return prisma.post.create({ data });
    }
 
-  async update(id: string, data: { title: string; content: string, published: boolean }) {
-    return prisma.post.update({ where: { id }, data });
+async update(
+  id: string, 
+  data: { 
+    title: string; 
+    content: string; 
+    published: boolean; 
+    authorName?: string;
   }
+) {
+  return prisma.post.update({ 
+    where: { id }, 
+    data 
+  });
+}
 
   async delete(id: string) {
     const result = await prisma.post.deleteMany({

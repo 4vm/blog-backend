@@ -29,8 +29,7 @@ export class PostController {
   async createPost(req: Request, res: Response) {
     const userRole = (req as any).user.role;
     const authorId = (req as any).user.id; 
-    
-    const { title, content, published } = req.body;
+    const { title, content, published, authorName } = req.body;
     
     try {
       if (!title || !content) {
@@ -41,6 +40,7 @@ export class PostController {
         title, 
         content, 
         authorId,
+        authorName,
         published: published ?? false 
       });
       
@@ -53,14 +53,19 @@ export class PostController {
   async updatePost(req: Request, res: Response) {
     const userRole = (req as any).user.role;
     const { id } = req.params;
-    const { title, content, published } = req.body;
+    const { title, content, published, authorName } = req.body;
     
     try {
       if (!title || !content || published === undefined) {
         return res.status(400).json({ message: "Todos os campos são obrigatórios." });
       }
       
-      const post = await postService.updatePost(id, userRole, { title, content, published });
+      const post = await postService.updatePost(id, userRole, { 
+        title, 
+        content, 
+        published,
+        authorName
+      });
       
       if (!post) { 
         return res.status(404).json({ message: "Post não encontrado" }); 

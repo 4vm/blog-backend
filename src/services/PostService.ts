@@ -3,15 +3,14 @@ import { PostRepository } from "../repositories/PostRepository"
 const postRepository = new PostRepository()
 
 export class PostService {
-  async getAllPosts(userRole: string) {
-    if (userRole === "STUDENT") {
-      return postRepository.findPublished();
-    }
-    if (userRole === "TEACHER") {
-      return postRepository.findAll();
-    }
-    throw new Error("Role inválido");
+async getAllPosts(userRole?: string) {
+  const role = userRole?.trim().toUpperCase() ?? "";
+  
+    if (role !== "TEACHER") {
+    return postRepository.findPublished();
   }
+    return postRepository.findAll();
+}
 
   async getPostById(id: string) {
     if (!id) {

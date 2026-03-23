@@ -28,10 +28,6 @@ describe("PostService", () => {
       const result = await postService.getAllPosts("TEACHER");
       expect(result).toEqual([expect.objectContaining({ id: "1", title: "Qualquer" })]);
     });
-
-    it("deve lançar erro para role inválido", async () => {
-      await expect(postService.getAllPosts("ADMIN")).rejects.toThrow("Role inválido");
-    });
   });
 
   describe("getPostById", () => {

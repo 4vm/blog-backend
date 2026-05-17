@@ -18,6 +18,29 @@ export class UserController {
     }
   }
 
+  async getUserById(req: Request, res: Response) {
+    const requesterId = (req as any).user?.id;
+    const requesterRole = (req as any).user?.role;
+    const { id } = req.params;
+
+    if (!requesterId || !requesterRole) {
+      return res.status(401).json({ error: "Usuário não autenticado." });
+    }
+
+    try {
+      const user = await userService.getUserById(requesterId, requesterRole, id);
+      return res.status(200).json(user);
+    } catch (error: any) {
+      if (error.message === "Acesso negado") {
+        return res.status(403).json({ error: error.message });
+      }
+      if (error.message === "Usuário não encontrado") {
+        return res.status(404).json({ error: error.message });
+      }
+      return res.status(500).json({ error: "Erro ao buscar usuário." });
+    }
+  }
+
   async updateUser(req: Request, res: Response) {
     const requesterId = (req as any).user?.id;
     const requesterRole = (req as any).user?.role;

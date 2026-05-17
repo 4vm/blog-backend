@@ -61,6 +61,20 @@ export class UserService {
     return userRepository.findAll();
   }
 
+  async getUserById(requesterId: string, requesterRole: string, id: string) {
+    if (requesterId !== id && requesterRole !== "TEACHER") {
+      throw new Error("Acesso negado");
+    }
+
+    const user = await userRepository.findById(id);
+    if (!user) {
+      throw new Error("Usuário não encontrado");
+    }
+
+    const { password: _p, ...userWithoutPassword } = user as any;
+    return userWithoutPassword;
+  }
+
   async updateUser(
     requesterId: string,
     requesterRole: string,

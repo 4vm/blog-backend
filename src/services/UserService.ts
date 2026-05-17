@@ -118,9 +118,6 @@ export class UserService {
       if (roleUpper === "TEACHER" && requesterRole !== "TEACHER") {
         throw new Error("Não autorizado para atribuir role TEACHER.");
       }
-      if (roleUpper === "TEACHER" && (!ADMIN_KEY || adminKey !== ADMIN_KEY)) {
-        throw new Error("Não autorizado para atribuir role TEACHER.");
-      }
       data.role = roleUpper;
     }
 
